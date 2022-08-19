@@ -15,3 +15,10 @@
 .post-thumb{
 	width:100%;
 }
+
+.post-comment{
+    background: gray;
+    padding: 4px;
+    margin: 3px 0;
+    display: block;
+}
