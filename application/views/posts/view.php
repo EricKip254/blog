@@ -26,3 +26,21 @@
 </div>
 
 </div>
+<hr>
+<h2>Add Comment</h2>
+<?php echo form_open('comments/create/'.$post['id']);?>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" name="email" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Body</label>
+        <textarea name="name" class="form-control"></textarea>
+    </div>
+    <input type="hidden" name="slug" value="<?php echo $post['slug'];?>">
+    <br>
+    <button class="btn btn-secondary" type="submit">Submit</button>
