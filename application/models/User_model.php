@@ -14,4 +14,14 @@
             //insert user data
             return $this->db->insert('users', $data);
         }
+
+        //check username exists
+        function check_username_exists($username){
+            $this->form_validation->set_message('check_username_exists', 'That username is taken. Please choose a different one');
+            if($this->user_model->check_username_exists($username)){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
