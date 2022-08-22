@@ -37,7 +37,7 @@
   
         <div class="col-md-3 text-end">
           <a class="btn btn-secondary" href="login.html" role="button">Sign In</a>
-          <a class="btn btn-secondary" href="register.html" role="button">Register</a>
+          <a class="btn btn-secondary" href="<?php echo base_url(); ?>users/register" role="button">Register</a>
         </div>
       </header>
     </div>
