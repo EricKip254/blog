@@ -14,18 +14,21 @@
 </div>
 
 <hr>
-<div class="row">
-<div class="col-sm-1">
-<a class="btn btn-secondary pull-left" href="<?php echo base_url();?>posts/edit/<?php echo $post['slug'];?>">Edit</a>
-</div>
-<div class="col-sm-1">
-<?php echo form_open('/posts/delete/'.$post['id']);?>
-   <input type="submit"value="delete" class="btn btn-danger">
-</form>
+<?php if($this->session->userdata('user_id') == $post['user_id']): ?>
+    <div class="row">
+    <div class="col-sm-1">
+    <a class="btn btn-secondary pull-left" href="<?php echo base_url();?>posts/edit/<?php echo $post['slug'];?>">Edit</a>
+    </div>
+    <div class="col-sm-1">
+    <?php echo form_open('/posts/delete/'.$post['id']);?>
+    <input type="submit"value="delete" class="btn btn-danger">
+    </form>
 
-</div>
+    </div>
 
-</div>
+    </div>
+<?php endif?>
+
 <hr>
 <h2>Add Comment</h2>
 <?php echo validation_errors()?>

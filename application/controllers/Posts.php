@@ -30,6 +30,12 @@ class Posts extends CI_Controller {
     }
 
     public function create(){
+        //set session to view create post
+        if(!$this->session->userdata('logged_in')){
+            redirect('users/login');
+        }
+
+        //create post
         $data['title'] = 'Create Post';
         $data['categories'] = $this->post_model->get_categories();
 
@@ -73,6 +79,10 @@ class Posts extends CI_Controller {
     }
 
     public function delete($id){
+        //set session to delet post
+        if(!$this->session->userdata('logged_in')){
+            redirect('users/login');
+        }
         
         $this->post_model->delete_post($id);
         //set flash data
@@ -81,8 +91,19 @@ class Posts extends CI_Controller {
     }
 
     public function edit($slug){
+        //set session to edit post
+        if(!$this->session->userdata('logged_in')){
+            redirect('users/login');
+        }
         
         $data['post'] = $this->post_model->get_posts($slug);
+
+        // Check user
+        if($this->session->userdata('user_id') != $this->post_model->get_posts($slug)['user_id']){
+            redirect('posts');
+        }
+
+
         $data['categories'] = $this->post_model->get_categories();
         
         if(empty($data['post'])){
@@ -97,6 +118,10 @@ class Posts extends CI_Controller {
     }
 
     public function update(){
+        //set session to update post
+        if(!$this->session->userdata('logged_in')){
+            redirect('users/login');
+        }
         $this->post_model->update_post();
         //set flash data msg
         $this->session->set_flashdata('post_updated', 'Your post has been updated.');
