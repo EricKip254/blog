@@ -36,7 +36,7 @@
         </ul>
   
         <div class="col-md-3 text-end">
-          <a class="btn btn-secondary" href="login.html" role="button">Sign In</a>
+          <a class="btn btn-secondary" href="<?php echo base_url(); ?>users/login"" role="button">Sign In</a>
           <a class="btn btn-secondary" href="<?php echo base_url(); ?>users/register" role="button">Register</a>
         </div>
       </header>
@@ -61,4 +61,12 @@
 
       <?php if($this->session->flashdata('category_created')) : ?>
         <?php echo '<p class = "alert alert-success">'.$this->session->flashdata('category_created').'</p>';?>
+      <?php endif; ?>
+
+      <?php if($this->session->flashdata('login_failed')): ?>
+        <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</p>'; ?>
+      <?php endif; ?>
+
+      <?php if($this->session->flashdata('user_loggedin')): ?>
+        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_loggedin').'</p>'; ?>
       <?php endif; ?>
