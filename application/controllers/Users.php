@@ -47,6 +47,15 @@
 				$user_id = $this->user_model->login($username, $password);
 
 				if($user_id){
+
+                    //set session data
+                    $user_data = array(
+						'user_id' => $user_id,
+						'username' => $username,
+						'logged_in' => true
+					);
+
+                    $this ->session->set_userdata($user_data);
                     
 					// Set message
 					$this->session->set_flashdata('user_loggedin', 'You are now logged in');
@@ -60,6 +69,18 @@
 				}		
 			}
 		}
+
+        //log out function
+        public function logout(){
+            $this->session->unset_userdata('logged_in');
+            $this->session->unset_userdata('user_id');
+            $this->session->unset_userdata('username');
+
+            $this->session->set_flashdata('user_loggedout', 'You are now logged out');
+
+            redirect('users/login');
+
+        }
 
         //check if user exists
 

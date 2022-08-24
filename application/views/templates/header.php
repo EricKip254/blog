@@ -29,15 +29,22 @@
           <li><a href="<?php echo base_url(); ?>" class="nav-link px-2 link-dark">Home</a></li>
           <li><a href="<?php echo base_url(); ?>posts" class="nav-link px-2 link-dark">Posts</a></li>
           <li><a href="<?php echo base_url(); ?>categories" class="nav-link px-2 link-dark">Categories</a></li>
-          <li><a href="<?php echo base_url(); ?>posts/create" class="nav-link px-2 link-dark">Create Post</a></li>
-          <li><a href="<?php echo base_url(); ?>categories/create" class="nav-link px-2 link-dark">Create Category</a></li>
+          <?php if($this->session->userdata('logged_in')) : ?>
+            <li><a href="<?php echo base_url(); ?>posts/create" class="nav-link px-2 link-dark">Create Post</a></li>
+            <li><a href="<?php echo base_url(); ?>categories/create" class="nav-link px-2 link-dark">Create Category</a></li>
+          <?php endif;?>
           <li><a href="<?php echo base_url(); ?>contact" class="nav-link px-2 link-dark">Contact</a></li>
           <li><a href="<?php echo base_url(); ?>about" class="nav-link px-2 link-dark">About</a></li>
         </ul>
   
         <div class="col-md-3 text-end">
+        <?php if(!$this->session->userdata('logged_in')) : ?>
           <a class="btn btn-secondary" href="<?php echo base_url(); ?>users/login"" role="button">Sign In</a>
           <a class="btn btn-secondary" href="<?php echo base_url(); ?>users/register" role="button">Register</a>
+        <?php endif;?>
+        <?php if($this->session->userdata('logged_in')) : ?>
+          <a class="btn btn-secondary" href="<?php echo base_url(); ?>users/logout"" role="button">Logout</a>
+        <?php endif;?>
         </div>
       </header>
     </div>
@@ -69,4 +76,8 @@
 
       <?php if($this->session->flashdata('user_loggedin')): ?>
         <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_loggedin').'</p>'; ?>
+      <?php endif; ?>
+
+      <?php if($this->session->flashdata('user_loggedout')): ?>
+        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_loggedout').'</p>'; ?>
       <?php endif; ?>
